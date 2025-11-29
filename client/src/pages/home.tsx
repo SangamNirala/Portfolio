@@ -813,7 +813,7 @@ function EducationSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Card className="card-depth-2 p-8 text-center education-card card-colored-border border-l-4 border-l-cyan-500" data-testid="card-education">
+            <Card className="card-depth-2 p-8 text-center education-card card-colored-border border-l-4 border-l-cyan-500 cursor-pointer" data-testid="card-education">
               <motion.div 
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center trophy-icon-animate"
@@ -884,7 +884,7 @@ function HonorsSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Card
-                  className={`card-depth-2 p-6 h-full honor-card card-colored-border border-l-4 ${honor.borderColor}`}
+                  className={`card-depth-2 p-6 h-full honor-card card-colored-border border-l-4 ${honor.borderColor} cursor-pointer`}
                   data-testid={`card-honor-${index}`}
                 >
                   <div className="flex items-start gap-4">
@@ -956,7 +956,7 @@ function CTASection() {
                 rel={option.href.startsWith("http") ? "noopener noreferrer" : ""}
                 whileHover={{ scale: 1.05, y: -4 }}
                 whileTap={{ scale: 0.98 }}
-                className="group p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
+                className="group p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer hover-elevate"
                 data-testid={option.testid}
               >
                 <div className="flex items-center gap-4">
