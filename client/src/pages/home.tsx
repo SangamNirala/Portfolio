@@ -3,7 +3,6 @@ const ProjectsSection = lazy(() => import("@/components/sections/projects-sectio
 const SkillsSection = lazy(() => import("@/components/sections/skills-section").then(m => ({ default: m.SkillsSection })));
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useCounter } from "@/hooks/use-counter";
-import { TestimonialsSection } from "@/components/testimonials-section";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -1139,7 +1138,6 @@ export default function Home() {
         <Suspense fallback={<LoadingFallback />}>
           <SkillsSection />
         </Suspense>
-        <TestimonialsSection />
         <EducationSection />
         <HonorsSection />
         <CTASection />
