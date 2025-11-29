@@ -2,6 +2,16 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import path from "path";
 import fs from "fs";
+import { storage } from "./storage";
+import { z } from "zod";
+
+// Contact form validation schema
+const contactFormSchema = z.object({
+  name: z.string().min(2).max(100),
+  email: z.string().email(),
+  subject: z.string().min(5).max(200),
+  message: z.string().min(10).max(5000),
+});
 
 export async function registerRoutes(
   httpServer: Server,
@@ -16,6 +26,27 @@ export async function registerRoutes(
       fs.createReadStream(resumePath).pipe(res);
     } else {
       res.status(404).json({ error: "Resume not found" });
+    }
+  });
+
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const parsed = contactFormSchema.safeParse(req.body);
+      
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Invalid form data", details: parsed.error });
+      }
+
+      const contactMessage = await storage.createContactMessage(parsed.data);
+      
+      res.json({ 
+        success: true, 
+        message: "Your message has been received. I'll get back to you within 24 hours.",
+        id: contactMessage.id 
+      });
+    } catch (error) {
+      console.error("Contact form error:", error);
+      res.status(500).json({ error: "Failed to submit contact form" });
     }
   });
 
