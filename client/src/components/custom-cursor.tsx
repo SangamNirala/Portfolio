@@ -20,17 +20,18 @@ export function CustomCursor() {
 
       // Check if hovering over interactive element
       const target = e.target as HTMLElement;
+      const isInputField = target.tagName === "INPUT" || target.closest("input");
       const isInteractive =
         target.tagName === "A" ||
         target.tagName === "BUTTON" ||
         target.classList.contains("cursor-glow") ||
         target.closest("button") ||
         target.closest("a") ||
-        target.closest("input") ||
         target.closest("[data-testid='ai-chat-dialog']");
 
       if (cursorRef.current) {
-        if (isInteractive) {
+        // Only add active class if interactive but NOT an input field
+        if (isInteractive && !isInputField) {
           cursorRef.current.classList.add("active");
         } else {
           cursorRef.current.classList.remove("active");
