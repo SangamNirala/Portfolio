@@ -115,13 +115,22 @@
   --secondary: 217 33% 21%;
   --secondary-foreground: 210 40% 98%;
   --muted: 217 33% 20%;
-  --muted-foreground: 215 20% 65%;
+  --muted-foreground: 215 20% 75%;
   --accent: 217 19% 18%;
   --accent-foreground: 210 40% 98%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 210 40% 98%;
   --input: 217 33% 25%;
   --ring: 217 91% 60%;
+  /* Dark mode shadows - enhanced for better depth */
+  --shadow-2xs: 0px 2px 0px 0px hsl(220 13% 7% / 0.15);
+  --shadow-xs: 0px 2px 0px 0px hsl(220 13% 7% / 0.20);
+  --shadow-sm: 0px 2px 0px 0px hsl(220 13% 7% / 0.20), 0px 1px 2px -1px hsl(220 13% 7% / 0.15);
+  --shadow: 0px 2px 0px 0px hsl(220 13% 7% / 0.25), 0px 1px 2px -1px hsl(220 13% 7% / 0.20);
+  --shadow-md: 0px 2px 0px 0px hsl(220 13% 7% / 0.25), 0px 2px 4px -1px hsl(220 13% 7% / 0.20);
+  --shadow-lg: 0px 2px 0px 0px hsl(220 13% 7% / 0.30), 0px 4px 6px -1px hsl(220 13% 7% / 0.25);
+  --shadow-xl: 0px 2px 0px 0px hsl(220 13% 7% / 0.35), 0px 8px 10px -1px hsl(220 13% 7% / 0.30);
+  --shadow-2xl: 0px 2px 0px 0px hsl(220 13% 7% / 0.40);
   --chart-1: 217 91% 70%;
   --chart-2: 142 76% 65%;
   --chart-3: 271 91% 75%;
@@ -561,9 +570,13 @@
     @apply from-primary/30 to-purple-500/30 border-primary/60 shadow-lg shadow-primary/20;
   }
 
-  /* Footer Enhancement */
+  /* Footer Enhancement - Dark Mode Compatible */
   .footer-top-divider {
-    @apply h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent;
+    @apply h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent dark:via-primary/50;
+  }
+
+  .section-divider {
+    @apply bg-gradient-to-r from-transparent via-primary/20 to-transparent dark:via-primary/30;
   }
 
   .footer-section-title {
@@ -599,6 +612,50 @@
 
   .footer-column {
     @apply space-y-6;
+  }
+
+  /* Dark Mode Background Texture */
+  .dark {
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.02) 0%, transparent 50%);
+  }
+
+  /* Enhanced text contrast for dark mode */
+  .dark .text-muted-foreground {
+    @apply text-gray-400;
+  }
+
+  .dark .text-muted {
+    @apply bg-slate-700/50;
+  }
+
+  /* Dark mode shadow improvements */
+  .dark .shadow-lg {
+    @apply shadow-lg shadow-black/40;
+  }
+
+  .dark .shadow-xl {
+    @apply shadow-xl shadow-black/50;
+  }
+
+  .dark .hover\:shadow-xl:hover {
+    @apply shadow-xl shadow-black/50;
+  }
+
+  /* Better divider contrast in dark mode */
+  .dark .border-border {
+    @apply border-slate-700/80;
+  }
+
+  .dark .bg-card\/50 {
+    @apply bg-slate-900/60;
+  }
+
+  /* Dark mode card enhancements */
+  .dark .card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   }
 
   /* Smooth transitions */
