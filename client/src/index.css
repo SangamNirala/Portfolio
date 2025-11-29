@@ -848,6 +848,13 @@
     @apply cursor-none;
   }
 
+  /* Show cursor on interactive elements within cursor-glow areas */
+  .cursor-glow .cursor-pointer,
+  .cursor-glow a,
+  .cursor-glow button {
+    cursor: pointer;
+  }
+
   /* Page Transition */
   @keyframes page-fade-in {
     from {
