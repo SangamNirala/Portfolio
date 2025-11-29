@@ -25,13 +25,25 @@ export function CustomCursor() {
       // Check if hovering over interactive element
       const target = e.target as HTMLElement;
       const isInputField = target.tagName === "INPUT" || target.closest("input");
+      
+      // Check if we're inside the AI dialog by traversing up the DOM
+      let isInDialog = false;
+      let current = target;
+      while (current && current !== document.body) {
+        if (current.getAttribute("data-testid") === "ai-chat-dialog") {
+          isInDialog = true;
+          break;
+        }
+        current = current.parentElement;
+      }
+      
       const isInteractive =
         target.tagName === "A" ||
         target.tagName === "BUTTON" ||
         target.classList.contains("cursor-glow") ||
         target.closest("button") ||
         target.closest("a") ||
-        target.closest("[data-testid='ai-chat-dialog']");
+        isInDialog;
 
       if (cursorRef.current) {
         // Only add active class if interactive but NOT an input field
