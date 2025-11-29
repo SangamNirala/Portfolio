@@ -315,7 +315,7 @@ function HeroSection() {
               <Button
                 size="lg"
                 onClick={scrollToProjects}
-                className="w-full sm:w-auto glass-button-primary px-8 py-6 rounded-lg font-semibold text-white"
+                className="w-full sm:w-auto glass-button-primary px-6 sm:px-8 py-4 sm:py-6 rounded-lg font-semibold text-white min-h-12 sm:min-h-9"
                 data-testid="button-view-projects"
               >
                 View Projects
@@ -335,7 +335,7 @@ function HeroSection() {
               <Button
                 size="lg"
                 onClick={downloadResume}
-                className="w-full sm:w-auto glass-button px-8 py-6 rounded-lg font-semibold text-white"
+                className="w-full sm:w-auto glass-button px-6 sm:px-8 py-4 sm:py-6 rounded-lg font-semibold text-white min-h-12 sm:min-h-9"
                 data-testid="button-download-resume"
               >
                 Download Resume
