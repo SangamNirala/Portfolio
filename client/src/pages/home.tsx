@@ -8,6 +8,8 @@ import { CustomCursor } from "@/components/custom-cursor";
 import { BreadcrumbNav } from "@/components/navigation/breadcrumb-nav";
 import { TableOfContents } from "@/components/navigation/table-of-contents";
 import { FloatingNav } from "@/components/navigation/floating-nav";
+import { GlossaryDialog } from "@/components/glossary/glossary-dialog";
+import { GlossaryTooltip } from "@/components/glossary/glossary-tooltip";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useCounter } from "@/hooks/use-counter";
@@ -60,6 +62,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
+import { BookOpen } from "lucide-react";
 import heroBackground from "@assets/generated_images/neural_network_tech_background.png";
 import profileImage from "@assets/image_1764392269903.png";
 
@@ -228,7 +231,7 @@ function HeroSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 page-section cursor-pointer" id="home" data-testid="section-hero" aria-label="Hero section - Introduction">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 page-section cursor-pointer" id="home" data-testid="section-hero" aria-label="Hero section - Introduction featuring ML Engineer Sangam Nirala">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat parallax-bg"
         style={{ 
@@ -1180,7 +1183,7 @@ function Footer() {
   );
 }
 
-function Navbar() {
+function Navbar({ onGlossaryClick }: { onGlossaryClick: () => void }) {
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -1252,6 +1255,18 @@ function Navbar() {
 
           {/* Right Side Controls */}
           <div className="flex items-center gap-3">
+            <motion.button
+              onClick={onGlossaryClick}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors duration-300 hover:bg-primary/10 cursor-pointer hidden sm:flex"
+              aria-label="Open glossary"
+              data-testid="button-glossary"
+              title="Technical glossary with definitions"
+            >
+              <BookOpen className="h-5 w-5" />
+            </motion.button>
+
             <motion.button
               onClick={toggleTheme}
               whileHover={{ scale: 1.1 }}
@@ -1373,11 +1388,14 @@ function LoadingFallback() {
 }
 
 export default function Home() {
+  const [glossaryOpen, setGlossaryOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background cursor-glow">
       <CustomCursor />
       <ScrollProgressBar />
-      <Navbar />
+      <Navbar onGlossaryClick={() => setGlossaryOpen(true)} />
+      <GlossaryDialog open={glossaryOpen} onOpenChange={setGlossaryOpen} />
       <main id="main-content" tabIndex={-1} role="main" className="focus:outline-none">
         <HeroSection />
         <AboutSection />
