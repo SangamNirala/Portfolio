@@ -18,9 +18,11 @@ export function CustomCursor() {
       cursorDotRef.current.style.left = `${e.clientX}px`;
       cursorDotRef.current.style.top = `${e.clientY}px`;
 
-      // Make cursor always visible
+      // Make cursor always visible with forced opacity
       cursorRef.current.style.opacity = "1";
       cursorDotRef.current.style.opacity = "1";
+      cursorRef.current.style.visibility = "visible";
+      cursorDotRef.current.style.visibility = "visible";
 
       // Check if hovering over interactive element
       const target = e.target as HTMLElement;
@@ -46,13 +48,29 @@ export function CustomCursor() {
         isInDialog;
 
       if (cursorRef.current) {
-        // Only add active class if interactive but NOT an input field
-        if (isInteractive && !isInputField) {
-          cursorRef.current.classList.add("active");
-          cursorDotRef.current.classList.add("active");
+        // Handle dialog state - dark cursor in dialog
+        if (isInDialog) {
+          cursorRef.current.classList.add("in-dialog");
+          cursorDotRef.current.classList.add("in-dialog");
+          // Always active in dialog
+          if (!isInputField) {
+            cursorRef.current.classList.add("active");
+            cursorDotRef.current.classList.add("active");
+          } else {
+            cursorRef.current.classList.remove("active");
+            cursorDotRef.current.classList.remove("active");
+          }
         } else {
-          cursorRef.current.classList.remove("active");
-          cursorDotRef.current.classList.remove("active");
+          cursorRef.current.classList.remove("in-dialog");
+          cursorDotRef.current.classList.remove("in-dialog");
+          // Only add active class if interactive but NOT an input field
+          if (isInteractive && !isInputField) {
+            cursorRef.current.classList.add("active");
+            cursorDotRef.current.classList.add("active");
+          } else {
+            cursorRef.current.classList.remove("active");
+            cursorDotRef.current.classList.remove("active");
+          }
         }
       }
     };
