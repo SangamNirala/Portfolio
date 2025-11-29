@@ -1341,10 +1341,10 @@ export default function Home() {
         <AboutSection />
         <StatsSection />
         <ExperienceSection />
-        <Suspense fallback={<LoadingFallback />}>
+        <Suspense fallback={<ProjectsSectionSkeleton />}>
           <ProjectsSection />
         </Suspense>
-        <Suspense fallback={<LoadingFallback />}>
+        <Suspense fallback={<SkillsSectionSkeleton />}>
           <SkillsSection />
         </Suspense>
         <EducationSection />
