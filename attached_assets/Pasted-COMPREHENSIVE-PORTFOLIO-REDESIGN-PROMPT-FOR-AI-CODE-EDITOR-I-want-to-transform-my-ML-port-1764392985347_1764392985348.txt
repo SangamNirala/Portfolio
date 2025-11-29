@@ -1,0 +1,112 @@
+COMPREHENSIVE PORTFOLIO REDESIGN PROMPT FOR AI CODE EDITOR:
+
+---
+
+I want to transform my ML portfolio into a world-class, high-converting design. 
+Please implement these UI/UX enhancements:
+
+### SECTION 1: INTERACTIVE PROJECT CARDS
+- Add hover effects: cards scale 1.05x with smooth transition
+- On hover, display "View Code" (GitHub) and "Live Demo" buttons with glassmorphic overlay
+- Overlay should have: backdrop-filter blur(10px), semi-transparent background (rgba(255,255,255,0.05))
+- Add project metrics prominently at top (e.g., "96.5% Accuracy", "92.4% Retrieval Rate")
+- Metrics displayed as colored badges with icons
+- Add deployment info (Flask, Streamlit, etc.)
+- All animations should be 300-500ms with smooth easing
+
+### SECTION 2: GLASSMORPHISM EFFECTS (2025 TREND)
+- Apply glassmorphic effects to:
+  * Hero section background (behind text area)
+  * Experience timeline cards (subtle glass effect)
+  * Project card overlays on hover
+  * Skills tier containers (Expert/Intermediate/Familiar sections)
+- Use: backdrop-filter: blur(10px), background: rgba(255,255,255,0.05), border: 1px solid rgba(255,255,255,0.1)
+
+### SECTION 3: MICRO-INTERACTIONS & ANIMATIONS
+- All buttons: Add ripple effect on click + 300ms scale animation
+- Section headings: Fade-in + slide-up animation when scrolling into view (600ms)
+- Skill tags: Staggered entrance animation (each tag delayed 50ms, 400ms duration per tag)
+- Achievement cards: Gentle bounce animation on scroll (500ms)
+- Links: Underline animation + subtle glow on hover (250ms)
+- Timeline dots: Continuous pulse animation (2-second loop)
+
+### SECTION 4: PROGRESS BAR & NAVIGATION
+- Add horizontal progress bar at top of page showing scroll position
+- Progress bar should fill from left to right as user scrolls
+- Navigation items: Active section should have animated underline
+- Implement smooth scroll-to-section when navigation clicked
+
+### SECTION 5: ABOUT SECTION REDESIGN
+Replace generic text with:
+"🎯 Impact-Driven ML Engineer | 2 Internships | Production Deployments
+I build production-grade ML systems that drive real business results:
+✓ Deployed real-time LSTM model serving 92.4% accuracy
+✓ Increased sales by 40% through AI automation workflows
+✓ Full-stack ML engineer (deep learning → deployment → scaling)"
+Remove "aspiring" - emphasize actual achievements
+
+### SECTION 6: ENHANCED SKILLS DISPLAY
+Reorganize skills into three tiers with visual indicators:
+- Expert (5 stars): Python, TensorFlow, PyTorch, Computer Vision, Flask, ML Pipelines
+- Intermediate (4 stars): JavaScript, HTML/CSS, Docker, GCP, NLP, LangChain
+- Familiar (2 stars): FastAPI, Streamlit, Keras, Jenkins, Scikit-learn, DVC
+Add small badge showing number of projects using each skill
+
+### SECTION 7: FOOTER ENHANCEMENTS
+- Add newsletter signup form: "Get ML & AI insights delivered monthly"
+- Add social media icons with hover animations:
+  * LinkedIn: Scale 1.1x + border glow on hover
+  * GitHub: Scale 1.1x + background color change
+  * Email: Scale 1.1x + icon color change
+- Add quick stats: "© 2025 Sangam Nirala"
+- Add optional: "Latest Article" section if you write technical blogs
+
+### SECTION 8: BENTO BOX STATS SECTION
+Create a "Quick Stats" section with 2x3 grid:
+Row 1: [Projects: 2] [Code Lines: 5000+] [Companies: 2]
+Row 2: [Languages: 4] [Frameworks: 8] [Deployed: Yes]
+Each stat box should have a unique icon and subtle gradient background
+
+### SECTION 9: PROJECT FILTERING
+- Add filter buttons above project cards: [All] [ML Models] [Web Apps] [Deployment]
+- Implement smooth filter transitions (fade out old, fade in new)
+- Show filtered count: "Showing X of 2 projects"
+
+### SECTION 10: TIMELINE INTERACTIVITY
+- Timeline dots: Add hover effects (scale 1.2x + glow)
+- Timeline line: Add gradient coloring (blue → teal)
+- Timeline dots: Make clickable to scroll to that experience
+- On hover, show tooltip with: [Company Name] [Duration] [Location]
+
+### SECTION 11: MOBILE OPTIMIZATION
+- Hamburger menu for navigation (visible on screens < 768px)
+- Stack all buttons full-width on mobile
+- Timeline: Vertical layout with dots on left side
+- Hero section: Profile pic stacked above text on mobile
+- Minimum touch target size: 48px height
+- Optimized font sizes for mobile readability
+
+### SECTION 12: ACCESSIBILITY & POLISH
+- Ensure WCAG AA color contrast compliance
+- Add alt text to all images/icons
+- Keyboard navigation fully supported
+- Add loading animations/skeleton screens for project cards
+- Add accessibility badges at bottom: "WCAG AA | Mobile Responsive | Lighthouse 95+"
+
+### SECTION 13: ANIMATIONS SPECIFICATIONS
+Keep animation durations consistent:
+- Button interactions: 200-300ms
+- Section transitions: 400-600ms
+- Hover effects: 250-350ms
+- Loading animations: 2-3 seconds
+Use ease-in-out or cubic-bezier for natural feeling
+
+### ADDITIONAL REQUIREMENTS:
+- Maintain dark theme with blue accents (current color scheme is good)
+- Add subtle background motion/parallax if performance allows
+- Ensure all animations can be disabled via prefers-reduced-motion
+- Test responsiveness on mobile (320px, 480px), tablet (768px), desktop (1920px)
+- Performance: Keep Lighthouse score > 90
+- All links should have visual feedback (hover state)
+
+---
