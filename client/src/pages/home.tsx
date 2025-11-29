@@ -35,8 +35,11 @@ import {
   Terminal,
   Star,
   ArrowUp,
+  Sun,
+  Moon,
   type LucideIcon,
 } from "lucide-react";
+import { useTheme } from "@/components/theme-provider";
 import heroBackground from "@assets/generated_images/neural_network_tech_background.png";
 import profileImage from "@assets/image_1764392269903.png";
 
@@ -920,6 +923,7 @@ function Footer() {
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -972,15 +976,38 @@ function Navbar() {
             ))}
           </div>
 
-          <Button
-            size="sm"
-            onClick={() => window.open("/api/resume", "_blank")}
-            className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 transition-all duration-300 transform hover:scale-105 active:scale-95"
-            data-testid="nav-button-resume"
-          >
-            <Download className="h-4 w-4 mr-2" />
-            Resume
-          </Button>
+          <div className="flex items-center gap-3">
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors duration-300 hover:bg-primary/10"
+              aria-label="Toggle theme"
+              data-testid="button-theme-toggle"
+            >
+              <motion.div
+                initial={false}
+                animate={{ rotate: theme === "dark" ? 0 : 180, scale: 1 }}
+                transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+              >
+                {theme === "dark" ? (
+                  <Moon className="h-5 w-5" />
+                ) : (
+                  <Sun className="h-5 w-5" />
+                )}
+              </motion.div>
+            </motion.button>
+
+            <Button
+              size="sm"
+              onClick={() => window.open("/api/resume", "_blank")}
+              className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 transition-all duration-300 transform hover:scale-105 active:scale-95"
+              data-testid="nav-button-resume"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Resume
+            </Button>
+          </div>
         </div>
       </div>
     </nav>
