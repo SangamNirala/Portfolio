@@ -8,6 +8,7 @@ import { CustomCursor } from "@/components/custom-cursor";
 import { BreadcrumbNav } from "@/components/navigation/breadcrumb-nav";
 import { TableOfContents } from "@/components/navigation/table-of-contents";
 import { FloatingNav } from "@/components/navigation/floating-nav";
+import { FloatingElements } from "@/components/floating-elements";
 import { GlossaryDialog } from "@/components/glossary/glossary-dialog";
 import { GlossaryTooltip } from "@/components/glossary/glossary-tooltip";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
@@ -908,17 +909,20 @@ function HonorsSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Card
-                  className={`card-depth-2 p-6 h-full honor-card card-colored-border border-l-4 ${honor.borderColor} cursor-pointer`}
+                  className={`card-depth-2 p-6 h-full honor-card card-colored-border border-l-4 ${honor.borderColor} cursor-pointer hover-elevate`}
                   data-testid={`card-honor-${index}`}
                 >
                   <div className="flex items-start gap-4">
                     <motion.div 
                       whileHover={{ scale: 1.15, rotate: 10 }}
                       className={`honor-badge-icon ${honor.badgeColor}`}
+                      animate={{ 
+                        y: [0, -8, 0],
+                        x: [0, 2, -2, 0]
+                      }}
+                      transition={{ duration: 3 + index * 0.5, repeat: Infinity, ease: "easeInOut" }}
                     >
                       <motion.span
-                        animate={{ y: [0, -3, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                         className="block"
                       >
                         <honor.icon className="h-6 w-6 trophy-icon-animate" />
