@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -57,6 +57,7 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={className}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>
@@ -82,7 +83,7 @@ function ScrollProgressBar() {
     <div className="fixed top-0 left-0 right-0 h-1 bg-border z-40">
       <motion.div
         className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
-        style={{ width: `${scrollProgress}%` }}
+        style={{ width: `${scrollProgress}%`, willChange: "width" }}
         transition={{ duration: 0.3 }}
       />
     </div>
@@ -217,7 +218,7 @@ function HeroSection() {
             <div className="relative w-32 h-32 md:w-40 md:h-40">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 opacity-75 blur-lg animate-pulse" />
               <div className="relative w-full h-full rounded-full border-4 border-white/30 overflow-hidden shadow-2xl">
-                <img src={profileImage} alt="Sangam Nirala" className="w-full h-full object-cover" />
+                <img src={profileImage} alt="Sangam Nirala" className="w-full h-full object-cover" loading="lazy" decoding="async" />
               </div>
             </div>
           </motion.div>
