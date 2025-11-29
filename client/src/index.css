@@ -561,6 +561,46 @@
     @apply from-primary/30 to-purple-500/30 border-primary/60 shadow-lg shadow-primary/20;
   }
 
+  /* Footer Enhancement */
+  .footer-top-divider {
+    @apply h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent;
+  }
+
+  .footer-section-title {
+    @apply text-lg font-bold text-foreground mb-4;
+  }
+
+  .footer-link {
+    @apply text-muted-foreground hover:text-primary transition-all duration-300 relative;
+  }
+
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: linear-gradient(to right, hsl(217 91% 60%), hsl(271 91% 65%));
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .footer-link:hover::after {
+    width: 100%;
+  }
+
+  .footer-social-link {
+    @apply text-muted-foreground hover:text-primary transition-all duration-300;
+  }
+
+  .footer-section {
+    @apply space-y-3;
+  }
+
+  .footer-column {
+    @apply space-y-6;
+  }
+
   /* Smooth transitions */
   * {
     @apply transition-colors duration-300;
