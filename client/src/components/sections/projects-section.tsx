@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code2, Brain, Rocket } from "lucide-react";
-import { useRef } from "react";
+import { Code2, Brain, Rocket, Zap } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 import { useInView } from "framer-motion";
 
 const projects = [
@@ -11,6 +11,8 @@ const projects = [
     title: "Face Detection System",
     description: "Real-time face recognition and gender classification system using computer vision techniques with SVM classifier and Flask web deployment.",
     tech: ["OpenCV", "SVM", "Flask", "PCA", "GridSearchCV"],
+    techCategories: { "Computer Vision": "ml", "Frameworks": "framework", "Deployment": "tools" },
+    category: "ML/AI",
     gradient: "from-violet-600 via-purple-500 to-indigo-600",
     icon: Brain,
     metrics: {
@@ -30,6 +32,8 @@ const projects = [
     title: "PDF Chatbot",
     description: "Multilingual chatbot using RAG with Gemini AI to query scanned/digital PDFs via Streamlit with hybrid retrieval and chat memory.",
     tech: ["RAG", "Gemini AI", "ChromaDB", "LangChain", "Streamlit"],
+    techCategories: { "RAG": "tools", "AI/LLM": "framework", "Streaming": "tools" },
+    category: "Full-Stack AI",
     gradient: "from-emerald-600 via-teal-500 to-cyan-600",
     icon: Code2,
     metrics: {
@@ -65,47 +69,110 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
   );
 }
 
+function AnimatedMetric({ value, label }: { value: string; label: string }) {
+  const [displayValue, setDisplayValue] = useState("0");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+    
+    const numericValue = parseFloat(value);
+    const duration = 2000;
+    const startTime = Date.now();
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = (numericValue * progress).toFixed(1);
+      setDisplayValue(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(value);
+      }
+    };
+
+    animate();
+  }, [isInView, value]);
+
+  return (
+    <div ref={ref}>
+      <p className="text-xs font-semibold text-gray-900 dark:text-gray-100">{label}</p>
+      <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">
+        {displayValue}{value.includes("%") ? "%" : ""}
+      </p>
+    </div>
+  );
+}
+
 export function ProjectsSection() {
   return (
-    <section id="projects" className="pt-16 py-20 md:py-28 bg-background" data-testid="section-projects">
+    <section id="projects" className="pt-16 py-24 md:py-32 bg-background relative" data-testid="section-projects">
+      <div className="section-divider" />
       <div className="max-w-6xl mx-auto px-6">
         <AnimatedSection>
-          <div className="flex items-center justify-center gap-3 mb-12">
+          <div className="flex flex-col items-center justify-center gap-3 mb-12">
             <Code2 className="h-8 w-8 text-primary" />
             <h2 className="text-4xl md:text-5xl font-bold text-foreground">Featured Projects</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-purple-500 rounded-full" />
           </div>
         </AnimatedSection>
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <AnimatedSection key={index}>
-              <Card className="h-full p-0 overflow-hidden group transition-all duration-300 transform hover:scale-105 hover:shadow-2xl" data-testid={`card-project-${index}`}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="project-card h-full p-0 overflow-hidden group transition-all duration-300 transform hover:scale-105 hover:shadow-2xl rounded-lg"
+                data-testid={`card-project-${index}`}
+              >
                 <div className={`aspect-video rounded-t-lg bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-black/20" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <project.icon className="h-16 w-16 text-white/90 drop-shadow-lg" />
                   </div>
 
-                  {/* Project Metrics */}
+                  {/* Category Tag */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
+                    className={`absolute top-3 left-3 category-badge ${project.category.includes("AI") ? "category-badge-ai" : "category-badge-ml"}`}
+                  >
+                    <Zap className="h-3 w-3" />
+                    {project.category}
+                  </motion.div>
+
+                  {/* Project Metrics - Animated */}
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     whileHover={{ opacity: 1, y: 0 }}
-                    className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg"
+                    className="absolute top-4 right-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg"
                     style={{ willChange: "transform, opacity" }}
                   >
-                    <p className="text-xs font-semibold text-gray-900">{project.metrics.label}</p>
-                    <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">
-                      {project.metrics.accuracy}
-                    </p>
+                    <AnimatedMetric value={project.metrics.accuracy} label={project.metrics.label} />
                   </motion.div>
 
-                  {/* Tech Stack */}
-                  <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
-                    {project.tech.slice(0, 3).map((tech, i) => (
-                      <span key={i} className="px-2 py-1 bg-black/30 backdrop-blur-sm rounded text-xs text-white/90 font-mono">
-                        {tech}
-                      </span>
-                    ))}
+                  {/* Tech Stack with Colors */}
+                  <div className="absolute top-14 left-3 flex gap-2 flex-wrap">
+                    {project.tech.slice(0, 3).map((tech, i) => {
+                      const badgeClass = i === 0 ? "tech-badge-ml" : i === 1 ? "tech-badge-framework" : "tech-badge-tools";
+                      return (
+                        <motion.span
+                          key={i}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: i * 0.05 }}
+                          className={`tech-badge ${badgeClass} px-2 py-1 rounded text-xs font-mono`}
+                        >
+                          {tech}
+                        </motion.span>
+                      );
+                    })}
                   </div>
 
                   {/* Hover Overlay with Buttons */}
@@ -156,14 +223,24 @@ export function ProjectsSection() {
                   </ul>
 
                   <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.tech.map((tech, i) => (
-                      <Badge key={i} variant="outline" className="font-mono text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
+                    {project.tech.map((tech, i) => {
+                      const badgeClass = i % 3 === 0 ? "tech-badge-ml" : i % 3 === 1 ? "tech-badge-framework" : "tech-badge-tools";
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: i * 0.05 }}
+                        >
+                          <Badge className={`tech-badge ${badgeClass} font-mono text-xs`}>
+                            {tech}
+                          </Badge>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
-              </Card>
+              </motion.div>
             </AnimatedSection>
           ))}
         </div>
