@@ -329,30 +329,6 @@
     @apply transition-all duration-300;
   }
 
-  /* Mobile responsive */
-  @media (max-width: 640px) {
-    .grid.md\:grid-cols-2 {
-      @apply grid-cols-1;
-    }
-
-    .grid.md\:grid-cols-3 {
-      @apply grid-cols-1;
-    }
-
-    .hidden.md\:flex {
-      @apply hidden;
-    }
-
-    .hidden.md\:block {
-      @apply hidden;
-    }
-
-    /* Full width buttons on mobile */
-    button[class*="size-lg"] {
-      @apply w-full;
-    }
-  }
-
   /* Placeholder styling for contentEditable div */
   [contenteditable][data-placeholder]:empty::before {
     content: attr(data-placeholder);
