@@ -855,6 +855,85 @@ function HonorsSection() {
   );
 }
 
+function CTASection() {
+  const contactOptions = [
+    { icon: Mail, label: "Email", value: "srnirala_b22@et.vjti.ac.in", href: "mailto:srnirala_b22@et.vjti.ac.in", testid: "cta-email" },
+    { icon: Linkedin, label: "LinkedIn", value: "LinkedIn Profile", href: "https://linkedin.com/in/sangamnirala", testid: "cta-linkedin" },
+    { icon: Github, label: "GitHub", value: "GitHub Profile", href: "https://github.com/sangamnirala", testid: "cta-github" },
+    { icon: Phone, label: "Call/WhatsApp", value: "+91 9987937919", href: "tel:+919987937919", testid: "cta-phone" },
+  ];
+
+  return (
+    <section className="py-20 md:py-28 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden" data-testid="section-cta">
+      <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
+        <AnimatedSection>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
+              Let's Work Together
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Ready to build something amazing? Whether it's a production ML system, automation workflow, or full-stack solution, let's connect and create impact together.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {contactOptions.map((option, index) => (
+              <motion.a
+                key={index}
+                href={option.href}
+                target={option.href.startsWith("http") ? "_blank" : "_self"}
+                rel={option.href.startsWith("http") ? "noopener noreferrer" : ""}
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                className="group p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
+                data-testid={option.testid}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="p-4 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300">
+                    <option.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{option.label}</p>
+                    <p className="font-semibold text-foreground group-hover:text-primary transition-colors">{option.value}</p>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.a
+              href="mailto:srnirala_b22@et.vjti.ac.in"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 rounded-lg bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold text-center hover:from-primary/90 hover:to-primary/70 transition-all duration-300 shadow-lg"
+              data-testid="cta-button-email"
+            >
+              Send Me an Email
+            </motion.a>
+            <motion.a
+              href="https://linkedin.com/in/sangamnirala"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 rounded-lg border-2 border-primary text-primary font-semibold text-center hover:bg-primary/10 transition-all duration-300"
+              data-testid="cta-button-linkedin"
+            >
+              Connect on LinkedIn
+            </motion.a>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -1169,6 +1248,7 @@ export default function Home() {
         <SkillsSection />
         <EducationSection />
         <HonorsSection />
+        <CTASection />
       </main>
       <Footer />
       <BackToTopButton />
