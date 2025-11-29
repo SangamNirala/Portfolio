@@ -2,9 +2,8 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Code2, FileCode, Globe, Database, Brain, Layers, Cpu, Eye, Rocket, Network, Zap, Container, Server, GitBranch, Cloud } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { useInView } from "framer-motion";
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import type { LucideIcon } from "lucide-react";
 
 const skillIcons: Record<string, LucideIcon> = {
@@ -64,75 +63,52 @@ export function SkillsSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-12 text-center">Technical Skills</h2>
         </AnimatedSection>
 
-        <SkillsGridWithParallax />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {Object.entries(skillsByTier).map(([tier, skills], tierIndex) => {
+            const tierColors = {
+              Expert: "from-yellow-500 to-orange-600",
+              Intermediate: "from-blue-500 to-purple-600",
+              Familiar: "from-green-500 to-teal-600",
+            };
+            const starCount = {
+              Expert: 5,
+              Intermediate: 3,
+              Familiar: 2,
+            };
+
+            return (
+              <AnimatedSection key={tier}>
+                <Card className="card-depth-2 p-6 transition-all duration-300 transform hover:scale-105 cursor-pointer" data-testid={`card-skill-tier-${tierIndex}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`p-3 rounded-lg bg-gradient-to-br ${tierColors[tier as keyof typeof tierColors]}`}>
+                      <span className="text-sm font-bold text-white">{tier}</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${i < starCount[tier as keyof typeof starCount] ? "fill-primary text-primary" : "text-muted-foreground"}`}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill) => {
+                      const SkillIcon = skillIcons[skill] || Code2;
+                      return (
+                        <Badge key={skill} variant="secondary" className="font-mono text-xs flex items-center gap-1.5">
+                          <SkillIcon className="h-3 w-3" />
+                          {skill}
+                        </Badge>
+                      );
+                    })}
+                  </div>
+                </Card>
+              </AnimatedSection>
+            );
+          })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function SkillsGridWithParallax() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const tierColors = {
-    Expert: "from-yellow-500 to-orange-600",
-    Intermediate: "from-blue-500 to-purple-600",
-    Familiar: "from-green-500 to-teal-600",
-  };
-  const starCount = {
-    Expert: 5,
-    Intermediate: 3,
-    Familiar: 2,
-  };
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {Object.entries(skillsByTier).map(([tier, skills], tierIndex) => (
-        <motion.div
-          key={tier}
-          style={{
-            y: scrollY * (0.1 + tierIndex * 0.05),
-            willChange: "transform",
-          }}
-        >
-          <AnimatedSection>
-            <Card className="card-depth-2 p-6 transition-all duration-300 transform hover:scale-105 cursor-pointer parallax-card" data-testid={`card-skill-tier-${tierIndex}`}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`p-3 rounded-lg bg-gradient-to-br ${tierColors[tier as keyof typeof tierColors]}`}>
-                  <span className="text-sm font-bold text-white">{tier}</span>
-                </div>
-              </div>
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-4 w-4 ${i < starCount[tier as keyof typeof starCount] ? "fill-primary text-primary" : "text-muted-foreground"}`}
-                  />
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill) => {
-                  const SkillIcon = skillIcons[skill] || Code2;
-                  return (
-                    <Badge key={skill} variant="secondary" className="font-mono text-xs flex items-center gap-1.5">
-                      <SkillIcon className="h-3 w-3" />
-                      {skill}
-                    </Badge>
-                  );
-                })}
-              </div>
-            </Card>
-          </AnimatedSection>
-        </motion.div>
-      ))}
-    </div>
   );
 }
