@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +37,8 @@ import {
   ArrowUp,
   Sun,
   Moon,
+  Menu,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
@@ -923,6 +925,7 @@ function Footer() {
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -947,12 +950,15 @@ function Navbar() {
     } else {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
+    setMobileMenuOpen(false);
   };
+
+  const navItems = ["About", "Experience", "Projects", "Skills", "Education"];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border" data-testid="navbar">
       <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between gap-4 flex-wrap">
+        <div className="flex items-center justify-between gap-4">
           <button
             onClick={() => scrollToSection("home")}
             className="text-lg font-bold text-foreground hover:text-primary transition-colors"
@@ -961,8 +967,9 @@ function Navbar() {
             SN
           </button>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            {["About", "Experience", "Projects", "Skills", "Education"].map((item) => (
+            {navItems.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -976,6 +983,7 @@ function Navbar() {
             ))}
           </div>
 
+          {/* Right Side Controls */}
           <div className="flex items-center gap-3">
             <motion.button
               onClick={toggleTheme}
@@ -998,6 +1006,27 @@ function Navbar() {
               </motion.div>
             </motion.button>
 
+            {/* Mobile Hamburger Button */}
+            <motion.button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="md:hidden relative p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors duration-300 hover:bg-primary/10"
+              aria-label="Toggle mobile menu"
+              data-testid="button-hamburger"
+            >
+              <motion.div
+                animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
+                transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
+              </motion.div>
+            </motion.button>
+
             <Button
               size="sm"
               onClick={() => window.open("/api/resume", "_blank")}
@@ -1005,11 +1034,57 @@ function Navbar() {
               data-testid="nav-button-resume"
             >
               <Download className="h-4 w-4 mr-2" />
-              Resume
+              <span className="hidden sm:inline">Resume</span>
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <motion.div
+        initial={false}
+        animate={{
+          height: mobileMenuOpen ? "auto" : 0,
+          opacity: mobileMenuOpen ? 1 : 0,
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="md:hidden overflow-hidden border-t border-border"
+      >
+        <div className="px-6 py-4 space-y-2 bg-background/95 backdrop-blur-lg">
+          {navItems.map((item) => (
+            <motion.button
+              key={item}
+              onClick={() => scrollToSection(item.toLowerCase())}
+              whileHover={{ x: 8 }}
+              transition={{ duration: 0.2 }}
+              className={`block w-full text-left py-2 px-4 rounded-lg font-medium transition-all duration-300 ${
+                activeSection === item.toLowerCase()
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+              }`}
+              data-testid={`nav-link-mobile-${item.toLowerCase()}`}
+            >
+              {item}
+            </motion.button>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Mobile Menu Backdrop */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/20 md:hidden"
+            style={{ top: "60px", zIndex: 30 }}
+            data-testid="mobile-menu-backdrop"
+          />
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
