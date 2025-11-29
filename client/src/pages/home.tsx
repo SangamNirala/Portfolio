@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, lazy, Suspense, ReactNode } from "react";
 const ProjectsSection = lazy(() => import("@/components/sections/projects-section").then(m => ({ default: m.ProjectsSection })));
 const SkillsSection = lazy(() => import("@/components/sections/skills-section").then(m => ({ default: m.SkillsSection })));
+import { ProjectsSectionSkeleton, SkillsSectionSkeleton } from "@/components/skeleton-loader";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useCounter } from "@/hooks/use-counter";
 import { Button } from "@/components/ui/button";

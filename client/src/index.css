@@ -654,6 +654,81 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   }
 
+  /* SECTION 12: LOADING & PERFORMANCE */
+
+  /* Skeleton Loading States */
+  .skeleton-line {
+    @apply rounded-md bg-gradient-to-r from-muted via-muted/50 to-muted dark:from-slate-700 dark:via-slate-700/50 dark:to-slate-700;
+    animation: skeleton-loading 2s infinite;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background: linear-gradient(
+        90deg,
+        hsl(var(--muted)) 0%,
+        hsl(var(--muted) / 0.5) 50%,
+        hsl(var(--muted)) 100%
+      );
+      background-size: 200% 100%;
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .dark .skeleton-line {
+    animation: skeleton-loading-dark 2s infinite;
+  }
+
+  @keyframes skeleton-loading-dark {
+    0% {
+      background: linear-gradient(
+        90deg,
+        rgb(51 65 85) 0%,
+        rgb(51 65 85 / 0.5) 50%,
+        rgb(51 65 85) 100%
+      );
+      background-size: 200% 100%;
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .skeleton-card {
+    @apply bg-card border border-border p-4 sm:p-5 md:p-6;
+  }
+
+  /* Shimmer effect for loading placeholders */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  /* Smooth fade transitions for lazy-loaded content */
+  .lazy-load-container {
+    @apply transition-opacity duration-500;
+  }
+
+  .lazy-load-container[data-loaded="true"] {
+    @apply opacity-100;
+  }
+
+  .lazy-load-container[data-loaded="false"] {
+    @apply opacity-0;
+  }
+
   /* SECTION 11: RESPONSIVE DESIGN POLISH */
   
   /* Mobile Typography Scaling */
