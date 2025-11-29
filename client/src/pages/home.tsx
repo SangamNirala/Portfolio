@@ -8,7 +8,6 @@ import { CustomCursor } from "@/components/custom-cursor";
 import { BreadcrumbNav } from "@/components/navigation/breadcrumb-nav";
 import { TableOfContents } from "@/components/navigation/table-of-contents";
 import { FloatingNav } from "@/components/navigation/floating-nav";
-import { FloatingElements } from "@/components/floating-elements";
 import { GlossaryDialog } from "@/components/glossary/glossary-dialog";
 import { GlossaryTooltip } from "@/components/glossary/glossary-tooltip";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
@@ -1407,7 +1406,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background cursor-glow relative">
-      <FloatingElements />
       <CustomCursor />
       <ScrollProgressBar />
       <Navbar onGlossaryClick={() => setGlossaryOpen(true)} />
