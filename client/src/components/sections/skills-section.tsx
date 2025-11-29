@@ -65,34 +65,6 @@ export function SkillsSection() {
         </AnimatedSection>
 
         <SkillsGridWithParallax />
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`p-3 rounded-lg bg-gradient-to-br ${tierColors[tier as keyof typeof tierColors]}`}>
-                      <span className="text-sm font-bold text-white">{tier}</span>
-                    </div>
-                  </div>
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${i < starCount[tier as keyof typeof starCount] ? "fill-primary text-primary" : "text-muted-foreground"}`}
-                      />
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {skills.map((skill) => {
-                      const SkillIcon = skillIcons[skill] || Code2;
-                      return (
-                        <Badge key={skill} variant="secondary" className="font-mono text-xs flex items-center gap-1.5">
-                          <SkillIcon className="h-3 w-3" />
-                          {skill}
-                        </Badge>
-                      );
-                    })}
-                  </div>
-                </Card>
-              </AnimatedSection>
-            );
-          })}
       </div>
     </section>
   );

@@ -1406,7 +1406,8 @@ export default function Home() {
   const [glossaryOpen, setGlossaryOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background cursor-glow">
+    <div className="min-h-screen bg-background cursor-glow relative">
+      <FloatingElements />
       <CustomCursor />
       <ScrollProgressBar />
       <Navbar onGlossaryClick={() => setGlossaryOpen(true)} />
