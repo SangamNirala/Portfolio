@@ -106,7 +106,7 @@ function FloatingContactWidget() {
   ];
 
   return (
-    <div className="fixed bottom-8 right-8 z-40" data-testid="floating-widget">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-40" data-testid="floating-widget">
       <AnimatePresence>
         {isOpen && (
           <motion.div
