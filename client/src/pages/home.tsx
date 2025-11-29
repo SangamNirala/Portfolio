@@ -4,6 +4,7 @@ const SkillsSection = lazy(() => import("@/components/sections/skills-section").
 import { ProjectsSectionSkeleton, SkillsSectionSkeleton } from "@/components/skeleton-loader";
 import { ContactForm } from "@/components/contact-form";
 import { SocialProofCards } from "@/components/social-proof";
+import { CustomCursor } from "@/components/custom-cursor";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useCounter } from "@/hooks/use-counter";
 import { Button } from "@/components/ui/button";
@@ -201,6 +202,7 @@ function BackToTopButton() {
 
 function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -220,12 +222,12 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16" id="home" data-testid="section-hero">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 page-section" id="home" data-testid="section-hero">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat parallax-bg"
         style={{ 
           backgroundImage: `url(${heroBackground})`,
-          transform: `translateY(${scrollY * 0.5}px)`,
+          transform: `translateY(${scrollY * 0.6}px)`,
           willChange: "transform"
         }}
       />
@@ -1346,7 +1348,8 @@ function LoadingFallback() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background cursor-glow">
+      <CustomCursor />
       <ScrollProgressBar />
       <Navbar />
       <main>
