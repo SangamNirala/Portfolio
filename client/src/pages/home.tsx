@@ -11,6 +11,8 @@ import { FloatingNav } from "@/components/navigation/floating-nav";
 import { ScrollAnimation, SectionHeading, StaggeredContainer, StaggeredItem } from "@/components/animations/scroll-animations";
 import { GlossaryDialog } from "@/components/glossary/glossary-dialog";
 import { GlossaryTooltip } from "@/components/glossary/glossary-tooltip";
+import { AIChatDialog } from "@/components/ai-chat-dialog";
+import { getWebsiteContent } from "@/lib/website-content";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useCounter } from "@/hooks/use-counter";
@@ -1255,7 +1257,7 @@ function Navbar({ onGlossaryClick }: { onGlossaryClick: () => void }) {
           {/* Right Side Controls */}
           <div className="flex items-center gap-3">
             <motion.button
-              onClick={() => {}}
+              onClick={() => setAiChatOpen(true)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="relative px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 hover:bg-primary/10 cursor-pointer hidden sm:block"
@@ -1387,6 +1389,7 @@ function LoadingFallback() {
 
 export default function Home() {
   const [glossaryOpen, setGlossaryOpen] = useState(false);
+  const [aiChatOpen, setAiChatOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background cursor-glow relative">
@@ -1394,6 +1397,7 @@ export default function Home() {
       <ScrollProgressBar />
       <Navbar onGlossaryClick={() => setGlossaryOpen(true)} />
       <GlossaryDialog open={glossaryOpen} onOpenChange={setGlossaryOpen} />
+      <AIChatDialog isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} websiteContent={getWebsiteContent()} />
       <main id="main-content" tabIndex={-1} role="main" className="focus:outline-none">
         <HeroSection />
         <AboutSection />
