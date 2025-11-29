@@ -59,8 +59,9 @@ export function AIChatDialog({ isOpen, onClose, websiteContent }: AIChatDialogPr
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.2 }}
-          className="fixed top-20 left-0 right-0 mx-4 md:mx-auto md:max-w-2xl z-50 bg-card border border-border rounded-xl shadow-lg"
+          className="fixed top-20 left-0 right-0 mx-4 md:mx-auto md:max-w-2xl z-40 bg-card border border-border rounded-xl shadow-lg"
           data-testid="ai-chat-dialog"
+          style={{ pointerEvents: "auto" }}
         >
           <div className="flex items-center justify-between p-4 border-b border-border">
             <h3 className="text-lg font-semibold text-foreground">Ask anything about Sangam Nirala</h3>

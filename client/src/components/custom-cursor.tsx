@@ -25,7 +25,8 @@ export function CustomCursor() {
         target.tagName === "BUTTON" ||
         target.classList.contains("cursor-glow") ||
         target.closest("button") ||
-        target.closest("a");
+        target.closest("a") ||
+        target.closest("input");
 
       if (cursorRef.current) {
         if (isInteractive) {
