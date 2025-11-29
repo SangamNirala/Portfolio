@@ -800,20 +800,35 @@ function EducationSection() {
         </AnimatedSection>
 
         <AnimatedSection>
-          <Card className="p-8 text-center transition-all duration-300 transform hover:scale-105 hover:shadow-xl" data-testid="card-education">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-              <GraduationCap className="h-10 w-10 text-primary" />
-            </div>
-            <h3 className="text-2xl font-bold text-foreground mb-2" data-testid="text-university">
-              Veermata Jijabai Technological Institute
-            </h3>
-            <p className="text-lg text-muted-foreground mb-2">Mumbai</p>
-            <p className="text-primary font-medium mb-2">Bachelor of Technology in Electronics and Telecommunication</p>
-            <p className="text-muted-foreground mb-4">2022 - 2026</p>
-            <Badge variant="secondary" className="text-lg px-4 py-1">
-              CGPA: 7.0/10
-            </Badge>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="p-8 text-center education-card card-colored-border border-l-4 border-l-cyan-500" data-testid="card-education">
+              <motion.div 
+                whileHover={{ scale: 1.15, rotate: 5 }}
+                className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center trophy-icon-animate"
+              >
+                <GraduationCap className="h-10 w-10 text-cyan-500" />
+              </motion.div>
+              <h3 className="text-2xl font-bold text-foreground mb-2" data-testid="text-university">
+                Veermata Jijabai Technological Institute
+              </h3>
+              <p className="text-lg text-muted-foreground mb-2">Mumbai</p>
+              <p className="text-primary font-medium mb-2">Bachelor of Technology in Electronics and Telecommunication</p>
+              <p className="text-muted-foreground mb-6">2022 - 2026</p>
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className="cgpa-badge"
+              >
+                <Zap className="h-4 w-4" />
+                CGPA: 7.0/10
+              </motion.span>
+            </Card>
+          </motion.div>
         </AnimatedSection>
       </div>
     </section>
@@ -855,21 +870,36 @@ function HonorsSection() {
         <div className="grid md:grid-cols-2 gap-6">
           {honors.map((honor, index) => (
             <AnimatedSection key={index}>
-              <Card
-                className={`p-6 h-full border-l-4 ${honor.borderColor} transition-all duration-300 transform hover:scale-105 hover:shadow-xl`}
-                data-testid={`card-honor-${index}`}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg shrink-0 ${honor.badgeColor}`}>
-                    <honor.icon className="h-6 w-6" />
+                <Card
+                  className={`p-6 h-full honor-card card-colored-border border-l-4 ${honor.borderColor}`}
+                  data-testid={`card-honor-${index}`}
+                >
+                  <div className="flex items-start gap-4">
+                    <motion.div 
+                      whileHover={{ scale: 1.15, rotate: 10 }}
+                      className={`honor-badge-icon ${honor.badgeColor}`}
+                    >
+                      <motion.span
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        className="block"
+                      >
+                        <honor.icon className="h-6 w-6 trophy-icon-animate" />
+                      </motion.span>
+                    </motion.div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-1">{honor.title}</h3>
+                      <p className="text-primary font-medium text-sm mb-2">{honor.event}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{honor.description}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-1">{honor.title}</h3>
-                    <p className="text-primary font-medium text-sm mb-2">{honor.event}</p>
-                    <p className="text-muted-foreground text-sm">{honor.description}</p>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             </AnimatedSection>
           ))}
         </div>

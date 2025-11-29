@@ -506,6 +506,61 @@
     @apply text-purple-400;
   }
 
+  /* Education & Honors Section Styling */
+  .education-card, .honor-card {
+    @apply transition-all duration-300 transform hover:scale-105 hover:shadow-xl;
+  }
+
+  /* Enhanced Left Border with Glow */
+  .card-colored-border {
+    position: relative;
+    border-left-width: 5px;
+  }
+
+  .card-colored-border::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-colored-border:hover::before {
+    opacity: 1;
+    box-shadow: -3px 0 15px currentColor;
+  }
+
+  /* Enhanced Badge Styling */
+  .honor-badge-icon {
+    @apply p-3 rounded-lg shrink-0 transition-all duration-300;
+  }
+
+  .honor-badge-icon:hover {
+    @apply scale-110 shadow-lg;
+  }
+
+  /* Icon Animations */
+  .trophy-icon-animate {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card-colored-border:hover .trophy-icon-animate {
+    transform: rotate(10deg) scale(1.2);
+  }
+
+  /* CGPA Badge Enhanced */
+  .cgpa-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/40 text-primary font-bold text-sm transition-all duration-300;
+  }
+
+  .cgpa-badge:hover {
+    @apply from-primary/30 to-purple-500/30 border-primary/60 shadow-lg shadow-primary/20;
+  }
+
   /* Smooth transitions */
   * {
     @apply transition-colors duration-300;
