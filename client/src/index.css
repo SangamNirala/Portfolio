@@ -336,6 +336,24 @@
     @apply relative bg-gradient-to-r from-blue-500 via-blue-600 to-blue-600 hover:from-blue-400 hover:via-blue-500 hover:to-blue-500 text-white border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300;
   }
 
+  /* Section dividers */
+  .section-divider {
+    @apply absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent;
+  }
+
+  .section-divider-dark {
+    @apply absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent;
+  }
+
+  /* Gradient heading underlines */
+  .heading-underline {
+    @apply h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full;
+  }
+
+  .heading-underline-sm {
+    @apply h-0.5 bg-gradient-to-r from-primary to-purple-500 rounded-full;
+  }
+
   /* Premium gradients */
   .gradient-primary {
     @apply bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600;

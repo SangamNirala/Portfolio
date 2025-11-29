@@ -407,11 +407,15 @@ function AboutSection() {
   ];
 
   return (
-    <section id="about" className="pt-16 py-20 md:py-28 bg-background" data-testid="section-about">
+    <section id="about" className="pt-16 py-24 md:py-32 bg-background relative" data-testid="section-about">
+      <div className="section-divider" />
       <div className="max-w-4xl mx-auto px-6">
         <AnimatedSection>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">Impact-Driven ML Engineer</h2>
-          <p className="text-lg text-primary font-semibold text-center mb-8">2 Internships | Production Deployments | Real Business Results</p>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Impact-Driven ML Engineer</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full mb-6" />
+            <p className="text-lg text-primary font-semibold text-center">2 Internships | Production Deployments | Real Business Results</p>
+          </div>
           
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             {achievements.map((item, i) => (
@@ -494,12 +498,14 @@ function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="pt-16 py-20 md:py-28 bg-card" data-testid="section-experience">
+    <section id="experience" className="pt-16 py-24 md:py-32 bg-card relative" data-testid="section-experience">
+      <div className="section-divider" />
       <div className="max-w-5xl mx-auto px-6">
         <AnimatedSection>
-          <div className="flex items-center justify-center gap-3 mb-12">
+          <div className="flex flex-col items-center justify-center gap-3 mb-12">
             <Briefcase className="h-8 w-8 text-primary" />
             <h2 className="text-4xl md:text-5xl font-bold text-foreground">Experience</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-purple-500 rounded-full" />
           </div>
         </AnimatedSection>
 
