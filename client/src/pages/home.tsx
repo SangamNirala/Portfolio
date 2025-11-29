@@ -405,42 +405,94 @@ function HeroSection() {
 
 function AboutSection() {
   const achievements = [
-    { icon: Rocket, text: "Deployed real-time LSTM model serving 92.4% accuracy", highlight: "production" },
-    { icon: Zap, text: "Increased sales by 40% through AI automation workflows", highlight: "impact" },
-    { icon: Code2, text: "Full-stack ML engineer: deep learning → deployment → scaling", highlight: "expertise" },
+    { icon: Rocket, text: "Deployed real-time LSTM model serving 92.4% accuracy", badge: "Production" },
+    { icon: Zap, text: "Increased sales by 40% through AI automation workflows", badge: "Impact" },
+    { icon: Code2, text: "Full-stack ML engineer: deep learning → deployment → scaling", badge: "Expertise" },
   ];
 
   return (
-    <section id="about" className="pt-16 py-24 md:py-32 bg-background relative" data-testid="section-about">
+    <section id="about" className="pt-16 py-24 md:py-32 bg-background relative overflow-hidden" data-testid="section-about">
       <div className="section-divider" />
-      <div className="max-w-4xl mx-auto px-6">
+      
+      {/* Subtle Background Pattern */}
+      <div className="about-pattern absolute inset-0 pointer-events-none" />
+      
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
         <AnimatedSection>
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Impact-Driven ML Engineer</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full mb-6" />
-            <p className="text-lg text-primary font-semibold text-center">2 Internships | Production Deployments | Real Business Results</p>
+          <div className="text-center mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="about-heading mb-6"
+              data-testid="text-about-title"
+            >
+              Impact-Driven ML Engineer
+            </motion.h2>
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="gradient-underline mx-auto w-20 mb-8"
+              style={{ transformOrigin: "center" }}
+            />
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-lg md:text-xl text-primary font-semibold tracking-wide"
+            >
+              2 Internships • Production Deployments • Real Business Results
+            </motion.p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="grid md:grid-cols-3 gap-6 mb-12"
+          >
             {achievements.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex flex-col items-center text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-300"
+                transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+                className="achievement-card"
               >
-                <item.icon className="h-8 w-8 text-primary mb-3" />
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.text}</p>
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                  className="mb-4"
+                >
+                  <item.icon className="h-10 w-10 text-primary group-hover:text-purple-400 transition-colors" />
+                </motion.div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.text}</p>
+                <motion.span 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + i * 0.1 }}
+                  className="achievement-badge"
+                >
+                  {item.badge}
+                </motion.span>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-center" data-testid="text-about-description">
-            I build production-grade ML systems that drive real business results. From designing automated workflows that increased sales 
-            by 40% to deploying real-time LSTM models with 92.4% accuracy, I've proven my ability to ship end-to-end solutions. 
-            My expertise spans deep learning, MLOps, cloud deployment, and full-stack development using TensorFlow, PyTorch, GCP, and Docker.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="max-w-3xl mx-auto"
+          >
+            <p className="text-lg text-muted-foreground leading-relaxed text-center mb-6" data-testid="text-about-description">
+              I build <span className="text-primary font-semibold">production-grade ML systems</span> that drive real business results. From designing automated workflows that increased sales by <span className="text-primary font-semibold">40%</span> to deploying real-time LSTM models with <span className="text-primary font-semibold">92.4% accuracy</span>, I've proven my ability to ship end-to-end solutions.
+            </p>
+            <p className="text-base text-muted-foreground/80 leading-relaxed text-center">
+              My expertise spans <span className="text-primary/80 font-medium">deep learning, MLOps, cloud deployment,</span> and <span className="text-primary/80 font-medium">full-stack development</span> using TensorFlow, PyTorch, GCP, and Docker. I'm passionate about building systems that scale.
+            </p>
+          </motion.div>
         </AnimatedSection>
       </div>
     </section>

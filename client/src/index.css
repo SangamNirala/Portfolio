@@ -471,7 +471,39 @@
 
   /* Achievement Badge */
   .achievement-badge {
-    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary/15 text-primary text-xs font-medium;
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/40 text-primary text-xs font-bold uppercase tracking-wide;
+  }
+
+  /* About Section Background Pattern */
+  .about-pattern {
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* About Heading with Gradient */
+  .about-heading {
+    @apply text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-purple-500 bg-clip-text text-transparent tracking-tight;
+  }
+
+  /* Gradient Underline */
+  .gradient-underline {
+    @apply h-1.5 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full;
+  }
+
+  /* Achievement Card Enhanced */
+  .achievement-card {
+    @apply flex flex-col items-center text-center p-6 rounded-xl bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-md border border-primary/20 transition-all duration-300;
+  }
+
+  .achievement-card:hover {
+    @apply border-primary/50 shadow-lg shadow-primary/10;
+  }
+
+  .achievement-card:hover .achievement-icon {
+    @apply text-purple-400;
   }
 
   /* Smooth transitions */
