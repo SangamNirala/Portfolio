@@ -5,6 +5,10 @@ import { ProjectsSectionSkeleton, SkillsSectionSkeleton } from "@/components/ske
 import { ContactForm } from "@/components/contact-form";
 import { SocialProofCards } from "@/components/social-proof";
 import { CustomCursor } from "@/components/custom-cursor";
+import { BreadcrumbNav } from "@/components/navigation/breadcrumb-nav";
+import { TableOfContents } from "@/components/navigation/table-of-contents";
+import { FloatingNav } from "@/components/navigation/floating-nav";
+import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useCounter } from "@/hooks/use-counter";
 import { Button } from "@/components/ui/button";
@@ -51,6 +55,8 @@ import {
   Lightbulb,
   Target,
   Flame,
+  Code,
+  Briefcase as BriefcaseIcon,
   type LucideIcon,
 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
