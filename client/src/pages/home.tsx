@@ -500,7 +500,7 @@ function AboutSection() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-primary font-semibold tracking-wide max-w-full px-2 mx-auto"
+              className="text-xs sm:text-sm md:text-base lg:text-lg text-primary font-semibold tracking-normal sm:tracking-wide max-w-full px-3 mx-auto leading-tight"
               data-testid="text-about-subtitle"
             >
               2 Internships • Production Deployments • Real Business Results
