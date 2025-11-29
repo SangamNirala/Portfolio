@@ -2,6 +2,8 @@ import { useRef, useState, useEffect, lazy, Suspense, ReactNode } from "react";
 const ProjectsSection = lazy(() => import("@/components/sections/projects-section").then(m => ({ default: m.ProjectsSection })));
 const SkillsSection = lazy(() => import("@/components/sections/skills-section").then(m => ({ default: m.SkillsSection })));
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useCounter } from "@/hooks/use-counter";
+import { TestimonialsSection } from "@/components/testimonials-section";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -192,6 +194,17 @@ function BackToTopButton() {
 }
 
 function HeroSection() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -204,7 +217,11 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16" id="home" data-testid="section-hero">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
+        style={{ 
+          backgroundImage: `url(${heroBackground})`,
+          transform: `translateY(${scrollY * 0.5}px)`,
+          willChange: "transform"
+        }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
 
@@ -564,44 +581,70 @@ function ExperienceSection() {
   );
 }
 
-const stats = [
-  { label: "Projects", value: "2", icon: Code2, gradient: "from-blue-500 to-cyan-500" },
-  { label: "Code Lines", value: "5000+", icon: Terminal, gradient: "from-purple-500 to-pink-500" },
-  { label: "Companies", value: "2", icon: Briefcase, gradient: "from-green-500 to-emerald-500" },
-  { label: "Languages", value: "4", icon: FileCode, gradient: "from-yellow-500 to-orange-500" },
-  { label: "Frameworks", value: "8", icon: Layers, gradient: "from-red-500 to-rose-500" },
-  { label: "Deployed", value: "Yes", icon: Rocket, gradient: "from-indigo-500 to-blue-500" },
+const statsData = [
+  { label: "Projects", value: 2, icon: Code2, gradient: "from-blue-500 to-cyan-500" },
+  { label: "Code Lines", value: 5000, icon: Terminal, gradient: "from-purple-500 to-pink-500" },
+  { label: "Companies", value: 2, icon: Briefcase, gradient: "from-green-500 to-emerald-500" },
+  { label: "Languages", value: 4, icon: FileCode, gradient: "from-yellow-500 to-orange-500" },
+  { label: "Frameworks", value: 8, icon: Layers, gradient: "from-red-500 to-rose-500" },
 ];
 
 function StatsSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-background to-card" data-testid="section-stats">
+    <section ref={ref} className="py-20 md:py-28 bg-gradient-to-b from-background to-card" data-testid="section-stats">
       <div className="max-w-6xl mx-auto px-6">
         <AnimatedSection>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-12 text-center">Quick Stats</h2>
         </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className={`relative overflow-hidden rounded-xl p-6 bg-gradient-to-br ${stat.gradient} opacity-10 hover:opacity-20 transition-opacity duration-300 group cursor-pointer`}
-              style={{ willChange: "transform, opacity" }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-              <div className="relative">
-                <stat.icon className="h-8 w-8 text-white/40 mb-2 group-hover:text-white/60 transition-colors" />
-                <p className="text-3xl font-bold text-white mb-1">{stat.value}</p>
-                <p className="text-sm text-white/80">{stat.label}</p>
-              </div>
-            </motion.div>
+          {statsData.map((stat, index) => (
+            <StatCard key={index} stat={stat} index={index} shouldAnimate={isInView} />
           ))}
+          <motion.div
+            key="deployed"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 5 * 0.1 }}
+            className="relative overflow-hidden rounded-xl p-6 bg-gradient-to-br from-indigo-500 to-blue-500 opacity-10 hover:opacity-20 transition-opacity duration-300 group cursor-pointer"
+            style={{ willChange: "transform, opacity" }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+            <div className="relative">
+              <Rocket className="h-8 w-8 text-white/40 mb-2 group-hover:text-white/60 transition-colors" />
+              <p className="text-3xl font-bold text-white mb-1">Yes</p>
+              <p className="text-sm text-white/80">Deployed</p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+function StatCard({ stat, index, shouldAnimate }: { stat: any; index: number; shouldAnimate: boolean }) {
+  const count = useCounter(stat.value, 2000, shouldAnimate);
+
+  return (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className={`relative overflow-hidden rounded-xl p-6 bg-gradient-to-br ${stat.gradient} opacity-10 hover:opacity-20 transition-opacity duration-300 group cursor-pointer`}
+      style={{ willChange: "transform, opacity" }}
+      data-testid={`stat-card-${index}`}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+      <div className="relative">
+        <stat.icon className="h-8 w-8 text-white/40 mb-2 group-hover:text-white/60 transition-colors" />
+        <p className="text-3xl font-bold text-white mb-1">{count}{stat.label === "Code Lines" ? "+" : ""}</p>
+        <p className="text-sm text-white/80">{stat.label}</p>
+      </div>
+    </motion.div>
   );
 }
 
@@ -1097,6 +1140,7 @@ export default function Home() {
         <Suspense fallback={<LoadingFallback />}>
           <SkillsSection />
         </Suspense>
+        <TestimonialsSection />
         <EducationSection />
         <HonorsSection />
         <CTASection />
