@@ -109,9 +109,9 @@ function AnimatedMetric({ value, label }: { value: string; label: string }) {
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="pt-16 py-24 md:py-32 bg-background relative" data-testid="section-projects">
+    <section id="projects" className="pt-16 spacing-premium bg-background section-pattern-default relative" data-testid="section-projects">
       <div className="section-divider" />
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="content-max-width mx-auto section-spacing-horizontal">
         <AnimatedSection>
           <div className="flex flex-col items-center justify-center gap-3 mb-12">
             <Code2 className="h-8 w-8 text-primary" />
@@ -127,7 +127,7 @@ export function ProjectsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="project-card h-full p-0 overflow-hidden group transition-all duration-300 transform hover:scale-105 hover:shadow-2xl rounded-lg"
+                className="project-card card-depth-3 h-full p-0 overflow-hidden group transition-all duration-300 transform hover:scale-105 rounded-lg"
                 data-testid={`card-project-${index}`}
               >
                 <div className={`aspect-video rounded-t-lg bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>

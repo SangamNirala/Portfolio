@@ -447,13 +447,13 @@ function AboutSection() {
   ];
 
   return (
-    <section id="about" className="pt-16 py-24 md:py-32 bg-background relative overflow-hidden" data-testid="section-about">
+    <section id="about" className="pt-16 spacing-premium bg-background section-pattern-default relative overflow-hidden" data-testid="section-about">
       <div className="section-divider" />
       
       {/* Subtle Background Pattern */}
       <div className="about-pattern absolute inset-0 pointer-events-none" />
       
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+      <div className="content-max-width mx-auto section-spacing-horizontal relative z-10">
         <AnimatedSection>
           <div className="text-center mb-16">
             <motion.h2 
@@ -590,9 +590,9 @@ function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="pt-16 py-24 md:py-32 bg-card relative" data-testid="section-experience">
+    <section id="experience" className="pt-16 spacing-premium bg-card section-pattern-default relative" data-testid="section-experience">
       <div className="section-divider" />
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="content-max-width mx-auto section-spacing-horizontal">
         <AnimatedSection>
           <div className="flex flex-col items-center justify-center gap-3 mb-12">
             <Briefcase className="h-8 w-8 text-primary" />
@@ -657,7 +657,7 @@ function ExperienceSection() {
                 />
 
                 <Card
-                  className={`ml-12 md:ml-0 md:w-1/2 p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-xl ${
+                  className={`card-depth-2 ml-12 md:ml-0 md:w-1/2 p-6 transition-all duration-300 transform hover:scale-105 ${
                     index % 2 === 0 ? "md:mr-8" : "md:ml-8"
                   }`}
                   data-testid={`card-experience-${index}`}
@@ -736,9 +736,9 @@ function StatsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-20 md:py-28 bg-gradient-to-b from-background via-background to-card relative" data-testid="section-stats">
+    <section ref={ref} className="spacing-section-lg bg-gradient-to-b from-background via-background to-card section-pattern-subtle relative" data-testid="section-stats">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="content-max-width mx-auto section-spacing-horizontal">
         <AnimatedSection>
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">Quick Stats</h2>
@@ -796,9 +796,9 @@ function StatCard({ stat, index, shouldAnimate }: { stat: any; index: number; sh
 
 function EducationSection() {
   return (
-    <section id="education" className="pt-16 py-24 md:py-32 bg-background relative" data-testid="section-education">
+    <section id="education" className="pt-16 spacing-premium bg-background section-pattern-default relative" data-testid="section-education">
       <div className="section-divider" />
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="content-max-width mx-auto section-spacing-horizontal">
         <AnimatedSection>
           <div className="flex flex-col items-center justify-center gap-3 mb-12">
             <GraduationCap className="h-8 w-8 text-primary" />
@@ -813,7 +813,7 @@ function EducationSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Card className="p-8 text-center education-card card-colored-border border-l-4 border-l-cyan-500" data-testid="card-education">
+            <Card className="card-depth-2 p-8 text-center education-card card-colored-border border-l-4 border-l-cyan-500" data-testid="card-education">
               <motion.div 
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center trophy-icon-animate"
@@ -864,9 +864,9 @@ const honors = [
 
 function HonorsSection() {
   return (
-    <section id="honors" className="py-24 md:py-32 bg-card relative" data-testid="section-honors">
+    <section id="honors" className="spacing-premium bg-card section-pattern-subtle relative" data-testid="section-honors">
       <div className="section-divider" />
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="content-max-width mx-auto section-spacing-horizontal">
         <AnimatedSection>
           <div className="flex flex-col items-center justify-center gap-3 mb-12">
             <Trophy className="h-8 w-8 text-primary" />
@@ -884,7 +884,7 @@ function HonorsSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Card
-                  className={`p-6 h-full honor-card card-colored-border border-l-4 ${honor.borderColor}`}
+                  className={`card-depth-2 p-6 h-full honor-card card-colored-border border-l-4 ${honor.borderColor}`}
                   data-testid={`card-honor-${index}`}
                 >
                   <div className="flex items-start gap-4">
@@ -925,10 +925,10 @@ function CTASection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden" data-testid="section-cta">
+    <section className="spacing-premium bg-gradient-to-b from-background via-primary/5 to-background section-pattern-accent relative overflow-hidden" data-testid="section-cta">
       <div className="section-divider" />
       <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="content-max-width mx-auto section-spacing-horizontal relative z-10">
         {/* Header */}
         <AnimatedSection>
           <div className="text-center mb-16">
@@ -1024,9 +1024,9 @@ function Footer() {
   };
 
   return (
-    <footer className="py-20 md:py-28 bg-background relative" data-testid="section-footer">
+    <footer className="spacing-section-lg bg-background section-pattern-default relative" data-testid="section-footer">
       <div className="footer-top-divider" />
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="content-max-width mx-auto section-spacing-horizontal">
         <div className="grid md:grid-cols-4 gap-16 mb-16">
           {/* Brand Column */}
           <motion.div 
