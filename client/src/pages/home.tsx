@@ -1184,7 +1184,7 @@ function Footer() {
   );
 }
 
-function Navbar({ onGlossaryClick }: { onGlossaryClick: () => void }) {
+function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => void; onAIClick: () => void }) {
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -1257,7 +1257,7 @@ function Navbar({ onGlossaryClick }: { onGlossaryClick: () => void }) {
           {/* Right Side Controls */}
           <div className="flex items-center gap-3">
             <motion.button
-              onClick={() => setAiChatOpen(true)}
+              onClick={onAIClick}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="relative px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 hover:bg-primary/10 cursor-pointer hidden sm:block"
@@ -1395,7 +1395,7 @@ export default function Home() {
     <div className="min-h-screen bg-background cursor-glow relative">
       <CustomCursor />
       <ScrollProgressBar />
-      <Navbar onGlossaryClick={() => setGlossaryOpen(true)} />
+      <Navbar onGlossaryClick={() => setGlossaryOpen(true)} onAIClick={() => setAiChatOpen(true)} />
       <GlossaryDialog open={glossaryOpen} onOpenChange={setGlossaryOpen} />
       <AIChatDialog isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} websiteContent={getWebsiteContent()} />
       <main id="main-content" tabIndex={-1} role="main" className="focus:outline-none">
