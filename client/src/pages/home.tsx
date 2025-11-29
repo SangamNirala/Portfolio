@@ -223,6 +223,22 @@ function HeroSection() {
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+      
+      {/* Animated Background Blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="blob-float-1 absolute -top-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-blue-500/20 to-transparent blur-3xl"
+          style={{ willChange: "transform" }}
+        />
+        <motion.div
+          className="blob-float-2 absolute top-1/2 -right-32 w-72 h-72 rounded-full bg-gradient-to-br from-purple-500/20 to-transparent blur-3xl"
+          style={{ willChange: "transform" }}
+        />
+        <motion.div
+          className="blob-float-3 absolute -bottom-40 left-1/3 w-96 h-96 rounded-full bg-gradient-to-br from-pink-500/15 to-transparent blur-3xl"
+          style={{ willChange: "transform" }}
+        />
+      </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <motion.div
@@ -288,24 +304,34 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 w-full"
           >
-            <Button
-              size="lg"
-              onClick={scrollToProjects}
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white px-8 py-6 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
-              data-testid="button-view-projects"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              View Projects
-              <ExternalLink className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              onClick={downloadResume}
-              className="w-full sm:w-auto border-2 border-white/40 text-white hover:bg-white/15 backdrop-blur-sm px-8 py-6 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95"
-              data-testid="button-download-resume"
+              <Button
+                size="lg"
+                onClick={scrollToProjects}
+                className="w-full sm:w-auto glass-button-primary px-8 py-6 rounded-lg font-semibold text-white"
+                data-testid="button-view-projects"
+              >
+                View Projects
+                <ExternalLink className="ml-2 h-5 w-5" />
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Download Resume
-              <Download className="ml-2 h-5 w-5" />
-            </Button>
+              <Button
+                size="lg"
+                onClick={downloadResume}
+                className="w-full sm:w-auto glass-button px-8 py-6 rounded-lg font-semibold text-white"
+                data-testid="button-download-resume"
+              >
+                Download Resume
+                <Download className="ml-2 h-5 w-5" />
+              </Button>
+            </motion.div>
           </motion.div>
 
           <motion.div
@@ -357,13 +383,15 @@ function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="cursor-pointer group"
+            onClick={scrollToProjects}
           >
-            <ChevronDown className="h-8 w-8 text-white/50" />
+            <ChevronDown className="h-8 w-8 text-white/60 group-hover:text-white/90 transition-colors" />
           </motion.div>
         </motion.div>
       </div>
