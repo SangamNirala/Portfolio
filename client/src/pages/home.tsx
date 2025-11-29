@@ -3,7 +3,6 @@ const ProjectsSection = lazy(() => import("@/components/sections/projects-sectio
 const SkillsSection = lazy(() => import("@/components/sections/skills-section").then(m => ({ default: m.SkillsSection })));
 import { ProjectsSectionSkeleton, SkillsSectionSkeleton } from "@/components/skeleton-loader";
 import { ContactForm } from "@/components/contact-form";
-import { TestimonialsSection } from "@/components/testimonials-section";
 import { SocialProofCards } from "@/components/social-proof";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useCounter } from "@/hooks/use-counter";
@@ -1363,7 +1362,6 @@ export default function Home() {
         </Suspense>
         <EducationSection />
         <HonorsSection />
-        <TestimonialsSection />
         <CTASection />
       </main>
       <Footer />
