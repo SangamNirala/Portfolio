@@ -10,7 +10,7 @@ import { ProjectsSectionSkeleton, SkillsSectionSkeleton } from "@/components/ske
 import { CustomCursor } from "@/components/custom-cursor";
 import { FloatingNav } from "@/components/navigation/floating-nav";
 import { GlossaryDialog } from "@/components/glossary/glossary-dialog";
-import { AIChatDialog } from "@/components/ai-chat-dialog";
+import { AIChatDialog } from "@/components/ai-chat";
 import { getWebsiteContent } from "@/lib/website-content";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { ScrollProgressBar } from "@/components/utils/scroll-progress-bar";
