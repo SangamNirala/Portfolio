@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon, Menu, X, Download } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
+import { MobileMenu } from "./mobile-menu";
 
 export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => void; onAIClick: () => void }) {
   const [activeSection, setActiveSection] = useState("home");
@@ -26,6 +27,10 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
   }, []);
 
   const scrollToSection = (id: string) => {
+    if (!id) {
+      setMobileMenuOpen(false);
+      return;
+    }
     if (id === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -46,6 +51,7 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
     <nav className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border cursor-pointer" data-testid="navbar" role="navigation" aria-label="Main navigation">
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between gap-4">
+          {/* Logo */}
           <button
             onClick={() => scrollToSection("home")}
             className="text-lg font-bold text-foreground hover:text-primary transition-colors cursor-pointer"
@@ -55,6 +61,7 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
             SN
           </button>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6" role="menubar">
             {navItems.map((item) => (
               <button
@@ -73,7 +80,9 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
             ))}
           </div>
 
+          {/* Right Actions */}
           <div className="flex items-center gap-3">
+            {/* AI Button */}
             <motion.button
               onClick={onAIClick}
               whileHover={{ scale: 1.1 }}
@@ -85,6 +94,7 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
               AI
             </motion.button>
 
+            {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
               whileHover={{ scale: 1.1 }}
@@ -107,6 +117,7 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
               </motion.div>
             </motion.button>
 
+            {/* Mobile Menu Toggle */}
             <motion.button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               whileHover={{ scale: 1.15 }}
@@ -129,6 +140,7 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
               </motion.div>
             </motion.button>
 
+            {/* Resume Button */}
             <Button
               size="sm"
               onClick={() => window.open("/api/resume", "_blank")}
@@ -142,58 +154,13 @@ export function Navbar({ onGlossaryClick, onAIClick }: { onGlossaryClick: () => 
         </div>
       </div>
 
-      <motion.div
-        initial={false}
-        animate={{
-          height: mobileMenuOpen ? "auto" : 0,
-          opacity: mobileMenuOpen ? 1 : 0,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="md:hidden overflow-hidden border-t border-primary/30 relative z-50 cursor-pointer bg-gradient-to-b from-card to-background/95"
-        id="mobile-menu"
-        role="navigation"
-        aria-label="Mobile navigation"
-      >
-        <div className="px-4 py-3 space-y-1 backdrop-blur-lg" role="menubar">
-          {navItems.map((item) => (
-            <motion.button
-              key={item}
-              type="button"
-              onClick={() => {
-                scrollToSection(item.toLowerCase());
-                setMobileMenuOpen(false);
-              }}
-              whileHover={{ x: 4 }}
-              className={`block w-full text-left py-3 px-4 rounded-lg font-medium transition-all duration-300 cursor-pointer text-base sm:text-lg ${
-                activeSection === item.toLowerCase()
-                  ? "text-primary bg-primary/15 border border-primary/30 font-semibold"
-                  : "text-muted-foreground hover:text-foreground hover:bg-primary/10 hover:border hover:border-primary/20"
-              }`}
-              data-testid={`nav-link-mobile-${item.toLowerCase()}`}
-              role="menuitem"
-              aria-current={activeSection === item.toLowerCase() ? "page" : undefined}
-              aria-label={`Navigate to ${item}`}
-            >
-              {item}
-            </motion.button>
-          ))}
-        </div>
-      </motion.div>
-
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm md:hidden pointer-events-auto"
-            style={{ top: "auto", bottom: 0, zIndex: 30, willChange: "opacity" }}
-            data-testid="mobile-menu-backdrop"
-          />
-        )}
-      </AnimatePresence>
+      {/* Mobile Menu Component */}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        navItems={navItems}
+        activeSection={activeSection}
+        onNavigate={scrollToSection}
+      />
     </nav>
   );
 }
