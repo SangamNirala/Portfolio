@@ -10,13 +10,13 @@ import { ProjectsSectionSkeleton, SkillsSectionSkeleton } from "@/components/ske
 import { CustomCursor } from "@/components/custom-cursor";
 import { FloatingNav } from "@/components/navigation/floating-nav";
 import { GlossaryDialog } from "@/components/glossary/glossary-dialog";
-import { AIChatDialog } from "@/components/ai-chat";
+import { AIChatDialog } from "@/components/chat/ai-chat";
 import { getWebsiteContent } from "@/lib/website-content";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { ScrollProgressBar } from "@/components/utils/scroll-progress-bar";
 import { BackToTopButton } from "@/components/utils/back-to-top-button";
 import { FloatingContactWidget } from "@/components/utils/floating-contact-widget";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/components/footer/footer";
 import { Navbar } from "@/components/navigation/navbar";
 
 const ProjectsSection = lazy(() => import("@/components/sections/projects-section").then(m => ({ default: m.ProjectsSection })));
