@@ -1,0 +1,360 @@
+/* COMPONENTS - Card, badge, button, and section-specific component styles */
+
+@layer utilities {
+  /* Glass effects */
+  .glass {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20;
+  }
+
+  .glass-button {
+    @apply backdrop-blur-lg bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300;
+  }
+
+  .glass-button-primary {
+    @apply relative bg-gradient-to-r from-blue-500 via-blue-600 to-blue-600 hover:from-blue-400 hover:via-blue-500 hover:to-blue-500 text-white border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300;
+  }
+
+  /* Project Card */
+  .project-card {
+    position: relative;
+    border: 2px solid;
+    border-image: linear-gradient(135deg, hsl(217 91% 60%), hsl(271 91% 65%), hsl(340 82% 52%)) 1;
+    transition: all 0.3s ease;
+  }
+
+  /* Tech badges */
+  .tech-badge-ml {
+    @apply bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/40 text-blue-300;
+  }
+
+  .tech-badge-framework {
+    @apply bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/40 text-purple-300;
+  }
+
+  .tech-badge-tools {
+    @apply bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/40 text-emerald-300;
+  }
+
+  .tech-badge-other {
+    @apply bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-400/40 text-orange-300;
+  }
+
+  /* Category badges */
+  .category-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest;
+  }
+
+  .category-badge-ml {
+    @apply bg-blue-500/20 text-blue-300 border border-blue-400/50;
+  }
+
+  .category-badge-ai {
+    @apply bg-purple-500/20 text-purple-300 border border-purple-400/50;
+  }
+
+  /* Achievement cards and badges */
+  .achievement-card {
+    @apply flex flex-col items-center text-center p-6 rounded-xl bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-md border border-primary/20 transition-all duration-300;
+  }
+
+  .achievement-card:hover {
+    @apply border-primary/50 shadow-lg shadow-primary/10;
+  }
+
+  .achievement-card:hover .achievement-icon {
+    @apply text-purple-400;
+  }
+
+  .achievement-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/40 text-primary text-xs font-bold uppercase tracking-wide;
+  }
+
+  /* About section components */
+  .about-heading {
+    @apply text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-purple-500 bg-clip-text text-transparent tracking-tight;
+  }
+
+  .gradient-underline {
+    @apply h-1.5 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full;
+  }
+
+  /* Education and honors cards */
+  .education-card, .honor-card {
+    @apply transition-all duration-300 transform hover:scale-105 hover:shadow-xl;
+  }
+
+  .card-colored-border {
+    position: relative;
+    border-left-width: 5px;
+  }
+
+  .card-colored-border::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-colored-border:hover::before {
+    opacity: 1;
+    box-shadow: -3px 0 15px currentColor;
+  }
+
+  /* Honor badge icon */
+  .honor-badge-icon {
+    @apply p-3 rounded-lg shrink-0 transition-all duration-300;
+  }
+
+  .honor-badge-icon:hover {
+    @apply scale-110 shadow-lg;
+  }
+
+  /* Trophy icon animation */
+  .trophy-icon-animate {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card-colored-border:hover .trophy-icon-animate {
+    transform: rotate(10deg) scale(1.2);
+  }
+
+  /* CGPA badge */
+  .cgpa-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/40 text-primary font-bold text-sm transition-all duration-300;
+  }
+
+  .cgpa-badge:hover {
+    @apply from-primary/30 to-purple-500/30 border-primary/60 shadow-lg shadow-primary/20;
+  }
+
+  /* Company logo effects */
+  .company-logo {
+    @apply transition-all duration-300 hover:scale-110 hover:shadow-2xl;
+  }
+
+  .company-logo-glow {
+    position: relative;
+  }
+
+  .company-logo-glow::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .company-logo-glow:hover::before {
+    opacity: 0.3;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+
+  /* Footer components */
+  .footer-top-divider {
+    @apply h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent dark:via-primary/50;
+  }
+
+  .footer-section-title {
+    @apply text-lg font-bold text-foreground mb-4;
+  }
+
+  .footer-link {
+    @apply text-muted-foreground hover:text-primary transition-all duration-300 relative;
+  }
+
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: linear-gradient(to right, hsl(217 91% 60%), hsl(271 91% 65%));
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .footer-link:hover::after {
+    width: 100%;
+  }
+
+  .footer-social-link {
+    @apply text-muted-foreground hover:text-primary transition-all duration-300;
+  }
+
+  .footer-section {
+    @apply space-y-3;
+  }
+
+  .footer-column {
+    @apply space-y-6;
+  }
+
+  /* Contact form styling */
+  .form-input {
+    @apply bg-background border-border focus:border-primary transition-colors;
+  }
+
+  .form-label {
+    @apply text-foreground font-medium;
+  }
+
+  /* Testimonial cards */
+  .testimonial-card {
+    @apply transition-all duration-300 hover:shadow-lg;
+  }
+
+  /* Button effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .button-hover {
+    @apply transition-all duration-200 active:scale-95;
+  }
+
+  /* Hover states */
+  .section-heading {
+    @apply transition-colors duration-300;
+  }
+
+  button:not(:disabled):hover {
+    @apply transition-all duration-300;
+  }
+
+  /* Glass overlays */
+  .glass-overlay {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-sm {
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Icon hover effects */
+  button svg, a svg {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  button:hover svg {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  a:hover svg {
+    transform: scale(1.15) rotate(-5deg);
+  }
+
+  /* Gradient link underline */
+  a {
+    position: relative;
+    text-decoration: none;
+  }
+
+  a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, hsl(217 91% 60%), hsl(271 91% 65%), hsl(340 82% 52%));
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: left;
+  }
+
+  a:hover::after {
+    width: 100%;
+  }
+
+  /* 3D card hover */
+  .card-3d-hover {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .card-3d-hover:hover {
+    transform: rotateX(2deg) rotateY(3deg) translateZ(10px);
+  }
+
+  /* Enhanced hover depth */
+  .hover-depth {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hover-depth:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px) scale(1.02);
+  }
+
+  .dark .hover-depth:hover {
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Button group */
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* CTA glow effects */
+  .cta-glow {
+    position: relative;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+    animation: cta-glow-pulse 2s ease-in-out infinite;
+  }
+
+  .cta-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, transparent 100%);
+    animation: cta-glow-shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow {
+      animation: none;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+    }
+
+    .cta-glow::before {
+      animation: none;
+    }
+  }
+
+  /* Micro-copy styling */
+  .cta-microcopy {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    letter-spacing: 0.5px;
+    animation: bounce-arrow 2s ease-in-out infinite;
+    margin-top: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-microcopy {
+      animation: none;
+      opacity: 0.7;
+    }
+  }
+}

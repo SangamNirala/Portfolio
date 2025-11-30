@@ -1,0 +1,99 @@
+/* RESPONSIVE DESIGN - Mobile typography, buttons, and responsive utilities */
+
+@layer utilities {
+  /* Mobile Typography Scaling */
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
+  }
+
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h3 {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+
+  h4 {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+
+  /* Improved Mobile Touch Targets */
+  button, [role="button"], .button-like {
+    @apply min-h-10 sm:min-h-9 md:min-h-9;
+  }
+
+  /* Mobile-specific button sizing */
+  @media (max-width: 640px) {
+    button:not([size="icon"]):not([size="sm"]) {
+      min-height: 3rem;
+      padding: 0.75rem 1.25rem;
+    }
+  }
+
+  /* Better Card Spacing on Mobile */
+  .card, [class*="card"] {
+    @apply p-4 sm:p-5 md:p-6;
+  }
+
+  /* Responsive Grid Gaps */
+  .grid {
+    @apply gap-4 sm:gap-5 md:gap-6 lg:gap-8;
+  }
+
+  /* Mobile-specific spacing for lists */
+  ul, ol {
+    @apply space-y-2 sm:space-y-3 md:space-y-4;
+  }
+
+  /* Responsive form elements */
+  input, textarea, select {
+    @apply px-3 sm:px-4 py-2 sm:py-3;
+    min-height: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
+    input, textarea, select {
+      min-height: 3rem;
+    }
+  }
+
+  /* Better text sizing for body copy */
+  body {
+    @apply text-sm sm:text-base md:text-base;
+  }
+
+  /* Responsive heading spacing */
+  h1, h2, h3, h4, h5, h6 {
+    @apply mb-3 sm:mb-4 md:mb-6;
+  }
+
+  /* Enhanced hover effects */
+  button:not(:disabled):hover {
+    @apply transition-all duration-300;
+  }
+
+  /* Button with ripple effect */
+  button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ripple animation */
+  button:active::before {
+    animation: ripple 0.6s ease-out;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: more) {
+    :focus-visible {
+      outline-width: 3px;
+    }
+
+    button,
+    a,
+    input {
+      border-width: 2px;
+    }
+  }
+}

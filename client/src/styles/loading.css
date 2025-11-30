@@ -1,0 +1,109 @@
+/* LOADING & PERFORMANCE - Skeleton loaders, shimmer effects, and lazy loading */
+
+@layer utilities {
+  /* Skeleton Loading States */
+  @keyframes skeleton-loading {
+    0% {
+      background: linear-gradient(
+        90deg,
+        hsl(var(--muted)) 0%,
+        hsl(var(--muted) / 0.5) 50%,
+        hsl(var(--muted)) 100%
+      );
+      background-size: 200% 100%;
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  @keyframes shimmer-slow {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .skeleton-line {
+    @apply rounded-md bg-gradient-to-r from-muted via-muted/50 to-muted dark:from-slate-700 dark:via-slate-700/50 dark:to-slate-700;
+    animation: skeleton-loading 2s infinite;
+  }
+
+  .dark .skeleton-line {
+    animation: skeleton-loading-dark 2s infinite;
+  }
+
+  @keyframes skeleton-loading-dark {
+    0% {
+      background: linear-gradient(
+        90deg,
+        rgb(51 65 85) 0%,
+        rgb(51 65 85 / 0.5) 50%,
+        rgb(51 65 85) 100%
+      );
+      background-size: 200% 100%;
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .skeleton-card {
+    @apply bg-card border border-border p-4 sm:p-5 md:p-6;
+  }
+
+  /* Shimmer effect for loading placeholders */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  /* Alternative shimmer for slow loaders */
+  .skeleton-line {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted) / 0.5) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer-slow 3s infinite;
+  }
+
+  /* Skeleton loading animation */
+  .skeleton-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: skeleton-loading 2s infinite;
+  }
+
+  .dark .skeleton-loading {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 1000px 100%;
+  }
+
+  /* Progressive image placeholder */
+  .image-placeholder {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: skeleton-loading 2s infinite;
+  }
+
+  .dark .image-placeholder {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 1000px 100%;
+    animation: skeleton-loading 2s infinite;
+  }
+}

@@ -1,0 +1,145 @@
+/* INTERACTIONS - Cursor effects, parallax, and scroll behaviors */
+
+@layer utilities {
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .smooth-scroll {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Hide ugly search cancel button */
+  input[type="search"]::-webkit-search-cancel-button {
+    @apply hidden;
+  }
+
+  /* Custom Cursor Glow */
+  .custom-cursor-glow {
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 9999 !important;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .custom-cursor-glow.active {
+    @apply w-10 h-10 border-primary/100;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+  }
+
+  .dark .custom-cursor-glow.active {
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+  }
+
+  /* Dark cursor in dialog */
+  .custom-cursor-glow.in-dialog {
+    border-color: rgba(30, 30, 30, 1) !important;
+  }
+
+  .custom-cursor-glow.in-dialog.active {
+    @apply w-10 h-10 border-2;
+    border-color: rgba(20, 20, 20, 1) !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Light mode cursor visibility */
+  .light .custom-cursor-glow {
+    border-color: rgba(59, 130, 246, 1) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .light .custom-cursor-dot {
+    background-color: rgba(59, 130, 246, 1) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.8);
+    z-index: 9999 !important;
+  }
+
+  .light .custom-cursor-dot.in-dialog {
+    background-color: rgba(20, 20, 20, 1) !important;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Cursor Hover Areas */
+  .cursor-glow {
+    @apply cursor-none;
+  }
+
+  /* Show cursor on interactive elements within cursor-glow areas */
+  .cursor-glow .cursor-pointer,
+  .cursor-glow a,
+  .cursor-glow button {
+    cursor: pointer;
+  }
+
+  /* Hover effects */
+  .icon-rotate {
+    @apply transition-transform duration-500;
+  }
+
+  button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+
+  button:active::before {
+    animation: ripple 0.6s ease-out;
+  }
+
+  /* Button Focus State for Accessibility */
+  button:focus-visible {
+    outline: 2px solid hsl(217 91% 60%);
+    outline-offset: 2px;
+  }
+
+  /* Link Focus State for Accessibility */
+  a:focus-visible {
+    outline: 2px solid hsl(217 91% 60%);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Section transitions */
+  .section-transition-enter {
+    animation: page-slide-in 0.5s ease-out forwards;
+  }
+
+  .section-transition-exit {
+    animation: page-slide-in 0.5s ease-out reverse forwards;
+  }
+
+  /* Smooth transitions */
+  * {
+    @apply transition-colors duration-300;
+  }
+
+  /* Lazy load container */
+  .lazy-load-container {
+    @apply transition-opacity duration-500;
+  }
+
+  .lazy-load-container[data-loaded="true"] {
+    @apply opacity-100;
+  }
+
+  .lazy-load-container[data-loaded="false"] {
+    @apply opacity-0;
+  }
+}
