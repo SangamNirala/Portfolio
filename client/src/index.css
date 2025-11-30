@@ -1,9 +1,5 @@
 /* MAIN INDEX - Imports all organized CSS modules */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Theme & Variables */
 @import "./styles/theme-variables.css";
 
@@ -39,3 +35,7 @@
 
 /* Performance Optimization */
 @import "./styles/performance.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
