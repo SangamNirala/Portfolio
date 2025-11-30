@@ -1,6 +1,6 @@
 import { Mail, Linkedin, Github, Phone } from "lucide-react";
 import { motion } from "framer-motion";
-import { ContactForm } from "@/components/contact-form";
+import { ContactForm } from "@/components/forms/contact-form";
 import { SocialProofCards } from "@/components/social-proof";
 import { AnimatedSection } from "@/components/utils/animated-section";
 
