@@ -30,10 +30,21 @@ function LoadingFallback() {
   );
 }
 
+const SECTIONS = [
+  { id: "home", title: "Home" },
+  { id: "about", title: "About" },
+  { id: "stats", title: "Stats" },
+  { id: "experience", title: "Experience" },
+  { id: "projects", title: "Projects" },
+  { id: "skills", title: "Skills" },
+  { id: "education", title: "Education" },
+  { id: "honors", title: "Honors" },
+];
+
 export default function Home() {
   const [glossaryOpen, setGlossaryOpen] = useState(false);
   const [aiChatOpen, setAiChatOpen] = useState(false);
-  const sections = useScrollSpy(["home", "about", "stats", "experience", "projects", "skills", "education", "honors"]);
+  const activeSection = useScrollSpy(["home", "about", "stats", "experience", "projects", "skills", "education", "honors"]);
 
   return (
     <div className="min-h-screen bg-background cursor-glow relative">
@@ -42,7 +53,7 @@ export default function Home() {
       <Navbar onGlossaryClick={() => setGlossaryOpen(true)} onAIClick={() => setAiChatOpen(true)} />
       <GlossaryDialog open={glossaryOpen} onOpenChange={setGlossaryOpen} />
       <AIChatDialog isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} websiteContent={getWebsiteContent()} />
-      <FloatingNav sections={sections.map(s => ({ id: s, title: s.charAt(0).toUpperCase() + s.slice(1) }))} activeSection={sections[0] || "home"} />
+      <FloatingNav sections={SECTIONS} activeSection={activeSection} />
       
       <main id="main-content" tabIndex={-1} role="main" className="focus:outline-none">
         <HeroSection />
