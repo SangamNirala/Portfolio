@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Mail, Linkedin, Github, Phone, Download, ExternalLink, ChevronDown } from "lucide-react";
+import profileImage from "@assets/image_1764403838014.png";
 import { scrollToProjects, downloadResume } from "./hero-actions";
 
 export function HeroContent() {
@@ -25,7 +26,7 @@ export function HeroContent() {
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 opacity-75 blur-lg animate-pulse" />
             <div className="relative w-full h-full rounded-full border-4 border-white/30 overflow-hidden shadow-2xl">
               <img
-                src="/assets/image_1764403838014.png"
+                src={profileImage}
                 alt="Sangam Nirala"
                 className="w-full h-full object-cover"
                 loading="lazy"
